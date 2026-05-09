@@ -1,0 +1,134 @@
+[
+  {
+    "id": "01",
+    "name": "Golden Retriever Puppy",
+    "category": "Pets",
+    "Price": 0,
+    "location": "Dhaka",
+    "description": "Friendly 2-month-old puppy available for adoption.",
+    "image": "https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&q=80&w=600",
+    "email": "owner@gmail.com",
+    "date": "2025-10-27"
+  },
+  {
+    "id": "02",
+    "name": "Premium Kitten Food",
+    "category": "Pet Food",
+    "Price": 25,
+    "location": "Chattogram",
+    "description": "High-protein dry food specifically for growing kittens.",
+    "image": "https://images.unsplash.com/photo-1589924691106-073b697596cd?auto=format&fit=crop&q=80&w=600",
+    "email": "shop@petmart.com",
+    "date": "2025-10-28"
+  },
+  {
+    "id": "03",
+    "name": "Cozy Pet Bed",
+    "category": "Accessories",
+    "Price": 45,
+    "location": "Sylhet",
+    "description": "Ultra-soft washable bed suitable for small dogs and cats.",
+    "image": "https://images.unsplash.com/photo-1541781719197-08316335b24b?auto=format&fit=crop&q=80&w=600",
+    "email": "seller@accessories.com",
+    "date": "2025-10-29"
+  },
+  {
+    "id": "04",
+    "name": "Organic Flea Shampoo",
+    "category": "Pet Care Products",
+    "Price": 15,
+    "location": "Khulna",
+    "description": "Natural ingredients to keep your pet's coat clean and flea-free.",
+    "image": "https://images.unsplash.com/photo-1583947581924-860bda6a26df?auto=format&fit=crop&q=80&w=600",
+    "email": "vetcare@gmail.com",
+    "date": "2025-10-30"
+  },
+  {
+    "id": "05",
+    "name": "Persian Cat",
+    "category": "Pets",
+    "Price": 0,
+    "location": "Dhaka",
+    "description": "Beautiful 1-year-old Persian cat looking for a loving home.",
+    "image": "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=600",
+    "email": "rescue@pets.org",
+    "date": "2025-10-31"
+  },
+  {
+    "id": "06",
+    "name": "Grain-Free Dog Biscuits",
+    "category": "Pet Food",
+    "Price": 12,
+    "location": "Rajshahi",
+    "description": "Healthy treats for dogs with sensitive stomachs.",
+    "image": "https://images.unsplash.com/photo-1544433480-e44299d8199f?auto=format&fit=crop&q=80&w=600",
+    "email": "dogtreats@gmail.com",
+    "date": "2025-11-01"
+  },
+  {
+    "id": "07",
+    "name": "Adjustable Cat Harness",
+    "category": "Accessories",
+    "Price": 20,
+    "location": "Dhaka",
+    "description": "Safe and comfortable harness for taking your cat for walks.",
+    "image": "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&q=80&w=600",
+    "email": "catwalk@outlook.com",
+    "date": "2025-11-02"
+  },
+  {
+    "id": "08",
+    "name": "Pet Vitamin Supplements",
+    "category": "Pet Care Products",
+    "Price": 30,
+    "location": "Chattogram",
+    "description": "Daily multivitamins to boost your pet's immune system.",
+    "image": "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&q=80&w=600",
+    "email": "healthypets@gmail.com",
+    "date": "2025-11-03"
+  },
+  {
+    "id": "09",
+    "name": "Rabbit Hutch",
+    "category": "Accessories",
+    "Price": 85,
+    "location": "Comilla",
+    "description": "Spacious two-story wooden hutch for outdoor or indoor use.",
+    "image": "https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&q=80&w=600",
+    "email": "bunnyhomes@gmail.com",
+    "date": "2025-11-04"
+  },
+  {
+    "id": "10",
+    "name": "German Shepherd Pup",
+    "category": "Pets",
+    "Price": 0,
+    "location": "Gazipur",
+    "description": "Smart and loyal puppy ready for adoption. Vaccinated.",
+    "image": "https://images.unsplash.com/photo-1589941013453-ec89f33b5e95?auto=format&fit=crop&q=80&w=600",
+    "email": "k9rescue@gmail.com",
+    "date": "2025-11-05"
+  },
+  {
+    "id": "11",
+    "name": "Bird Seed Mix",
+    "category": "Pet Food",
+    "Price": 8,
+    "location": "Dhaka",
+    "description": "A nutritious blend of seeds for various cage birds.",
+    "image": "https://images.unsplash.com/photo-1522850954073-904c986d6d31?auto=format&fit=crop&q=80&w=600",
+    "email": "birdie@gmail.com",
+    "date": "2025-11-06"
+  },
+  {
+    "id": "12",
+    "name": "Pet Grooming Kit",
+    "category": "Pet Care Products",
+    "Price": 55,
+    "location": "Sylhet",
+    "description": "Complete professional grooming set with clippers and brushes.",
+    "image": "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&q=80&w=600",
+    "email": "groomers@gmail.com",
+    "date": "2025-11-07"
+  }
+]
