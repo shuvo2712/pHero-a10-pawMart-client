@@ -49,9 +49,9 @@ const Navbar = () => {
       <div className="navbar-end">
         {user ? (
           <div className="flex items-center gap-3">
-            <div className="avatar">
+            <div className="avatar" title={user?.displayName}>
               <div className="w-10 rounded-full border border-primary">
-                <img alt="User Avatar" src={user?.photoURL || "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"} />
+                <img alt="User Avatar" src={user?.photoURL || "https://i.ibb.co/5GzXkwq/user.png"} />
               </div>
             </div>
             <button onClick={logout} className="btn btn-outline btn-error btn-sm">Logout</button>

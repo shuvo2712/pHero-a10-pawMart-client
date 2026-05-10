@@ -5,21 +5,34 @@ import { FaEnvelope, FaLock, FaGoogle } from "react-icons/fa";
 import toast from "react-hot-toast";
 
 const Login = () => {
-  const { login } = useContext(AuthContext);
+  const { login, googleLogin } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleLogin = (e) => {
     e.preventDefault();
-    login();
-    navigate(location.state || "/");
-    toast.success("Successfully logged in!");
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    login(email, password)
+      .then(() => {
+        toast.success("Successfully logged in!");
+        navigate(location.state || "/");
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
   };
 
   const handleGoogleLogin = () => {
-    login();
-    toast.success("Logged in with Google!");
-    navigate(location.state || "/");
+    googleLogin()
+      .then(() => {
+        toast.success("Logged in with Google!");
+        navigate(location.state || "/");
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
   };
 
   return (
@@ -36,6 +49,7 @@ const Login = () => {
               <div className="relative">
                 <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-base-content/30" />
                 <input
+                  name="email"
                   type="email"
                   placeholder="Email Address"
                   className="input input-bordered w-full pl-12 rounded-xl focus:outline-primary"
@@ -50,6 +64,7 @@ const Login = () => {
               <div className="relative">
                 <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-base-content/30" />
                 <input
+                  name="password"
                   type="password"
                   placeholder="••••••••"
                   className="input input-bordered w-full pl-12 rounded-xl focus:outline-primary"

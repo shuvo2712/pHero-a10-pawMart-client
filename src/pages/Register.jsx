@@ -5,13 +5,16 @@ import { FaUser, FaEnvelope, FaImage, FaLock, FaGoogle } from "react-icons/fa";
 import toast from "react-hot-toast";
 
 const Register = () => {
-  const { login } = useContext(AuthContext); 
+  const { register, googleLogin, updateUserProfile } = useContext(AuthContext); 
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const photo = form.photo.value;
     const password = form.password.value;
 
     // Password Validation
@@ -28,15 +31,29 @@ const Register = () => {
       return;
     }
 
-    login();
-    toast.success("Account created successfully!");
-    navigate(location.state || "/");
+    register(email, password)
+      .then(() => {
+        updateUserProfile(name, photo)
+          .then(() => {
+            toast.success("Account created successfully!");
+            navigate(location.state || "/");
+          })
+          .catch((err) => toast.error(err.message));
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
   };
 
   const handleGoogleLogin = () => {
-    login();
-    toast.success("Account created with Google!");
-    navigate(location.state || "/");
+    googleLogin()
+      .then(() => {
+        toast.success("Account created with Google!");
+        navigate(location.state || "/");
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
   };
 
   return (
