@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { FaUser, FaEnvelope, FaImage, FaLock, FaGoogle } from "react-icons/fa";
 import toast from "react-hot-toast";
 
 const Register = () => {
   const { login } = useContext(AuthContext); 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -29,13 +30,13 @@ const Register = () => {
 
     login();
     toast.success("Account created successfully!");
-    navigate("/");
+    navigate(location.state || "/");
   };
 
   const handleGoogleLogin = () => {
     login();
     toast.success("Account created with Google!");
-    navigate("/");
+    navigate(location.state || "/");
   };
 
   return (

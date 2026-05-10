@@ -68,31 +68,24 @@ const PetsAndSupplies = () => {
       {/* Product Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredListings.map((item) => (
-          <div key={item.id} className="card bg-base-100 shadow-xl border border-base-200 hover:shadow-2xl transition-all duration-300">
-            <figure className="px-6 pt-6">
-              <img
-                src={item.image}
-                alt={item.name}
-                className="rounded-xl h-56 w-full object-cover"
-              />
+          <div key={item.id} className="card bg-base-100 shadow-lg border border-base-200 hover:shadow-xl transition-shadow duration-300">
+            <figure>
+              <img src={item.image} alt={item.name} className="w-full h-52 object-cover" />
             </figure>
-            <div className="card-body">
+            <div className="card-body p-5">
               <div className="flex justify-between items-start">
-                <h2 className="card-title text-primary font-bold">{item.name}</h2>
-                <span className="badge badge-outline text-xs font-medium">{item.category}</span>
-              </div>
-              <p className="text-base-content/70 flex items-center gap-1 text-sm">
-                <FaMapMarkerAlt className="text-secondary" /> {item.location}
-              </p>
-              <div className="card-actions justify-between items-center mt-6">
-                <span className="text-xl font-extrabold text-secondary">
-                  {item.Price === 0 ? (
-                    <span className="text-success">Free for Adoption</span>
-                  ) : (
-                    `$${item.Price}`
-                  )}
+                <span className="badge badge-secondary badge-outline text-xs">{item.category}</span>
+                <span className="font-bold text-primary text-lg">
+                  {item.Price === 0 ? <span className="text-success">Free</span> : `$${item.Price}`}
                 </span>
-                <Link to={`/listing-details/${item.id}`} className="btn btn-primary btn-sm rounded-lg px-6">
+              </div>
+              <h3 className="card-title text-lg mt-2">{item.name}</h3>
+              <div className="flex items-center gap-2 text-sm text-base-content/60">
+                <FaMapMarkerAlt className="text-secondary" />
+                <span>{item.location}</span>
+              </div>
+              <div className="card-actions mt-4">
+                <Link to={`/listing-details/${item.id}`} className="btn btn-primary btn-sm w-full rounded-xl">
                   See Details
                 </Link>
               </div>

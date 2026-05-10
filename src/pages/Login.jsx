@@ -1,24 +1,25 @@
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { FaEnvelope, FaLock, FaGoogle } from "react-icons/fa";
 import toast from "react-hot-toast";
 
 const Login = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogin = (e) => {
     e.preventDefault();
     login();
-    navigate("/");
+    navigate(location.state || "/");
     toast.success("Successfully logged in!");
   };
 
   const handleGoogleLogin = () => {
     login();
     toast.success("Logged in with Google!");
-    navigate("/");
+    navigate(location.state || "/");
   };
 
   return (
