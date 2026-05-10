@@ -8,9 +8,9 @@ const AuthProvider = ({ children }) => {
   // Login
   const login = () => {
     setUser({
-      name: "Mock User",
-      email: "mockuser@example.com",
-      photoURL: "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+      name: "",
+      email: "",
+      photoURL: ""
     });
   };
 

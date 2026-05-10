@@ -10,6 +10,7 @@ import MyListings from "../pages/MyListings";
 import MyOrders from "../pages/MyOrders";
 import CategoryProducts from "../pages/CategoryProducts";
 import ListingDetails from "../pages/ListingDetails";
+import PrivateRoute from "../routes/PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -30,10 +31,6 @@ export const router = createBrowserRouter([
         element: <CategoryProducts />,
       },
       {
-        path: "/listing-details/:id",
-        element: <ListingDetails />,
-      },
-      {
         path: "/login",
         element: <Login />,
       },
@@ -41,18 +38,37 @@ export const router = createBrowserRouter([
         path: "/register",
         element: <Register />,
       },
-      // Private Route placeholders (authentication check will be added later)
+      {
+        path: "/listing-details/:id",
+        element: (
+          <PrivateRoute>
+            <ListingDetails />
+          </PrivateRoute>
+        ),
+      },
       {
         path: "/add-listing",
-        element: <AddListing />,
+        element: (
+          <PrivateRoute>
+            <AddListing />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-listings",
-        element: <MyListings />,
+        element: (
+          <PrivateRoute>
+            <MyListings />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-orders",
-        element: <MyOrders />,
+        element: (
+          <PrivateRoute>
+            <MyOrders />
+          </PrivateRoute>
+        ),
       },
     ],
   },
