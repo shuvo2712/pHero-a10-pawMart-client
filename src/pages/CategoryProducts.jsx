@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { FaMapMarkerAlt, FaChevronLeft } from "react-icons/fa";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 const CategoryProducts = () => {
   const { categoryName } = useParams();
+  useDocumentTitle(categoryName);
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
 

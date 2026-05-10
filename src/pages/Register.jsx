@@ -3,11 +3,13 @@ import { AuthContext } from "../providers/AuthProvider";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { FaUser, FaEnvelope, FaImage, FaLock, FaGoogle } from "react-icons/fa";
 import toast from "react-hot-toast";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 const Register = () => {
   const { register, googleLogin, updateUserProfile } = useContext(AuthContext); 
   const navigate = useNavigate();
   const location = useLocation();
+  useDocumentTitle("Register");
 
   const handleRegister = (e) => {
     e.preventDefault();

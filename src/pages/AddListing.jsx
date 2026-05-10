@@ -3,10 +3,12 @@ import { AuthContext } from "../providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { FaTag, FaList, FaDollarSign, FaMapMarkerAlt, FaAlignLeft, FaImage, FaCalendarAlt } from "react-icons/fa";
 import toast from "react-hot-toast";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 const AddListing = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+  useDocumentTitle("Add Listing");
 
   const handleSubmit = (e) => {
     e.preventDefault();

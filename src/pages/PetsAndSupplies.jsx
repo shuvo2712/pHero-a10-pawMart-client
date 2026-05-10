@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaMapMarkerAlt, FaSearch } from "react-icons/fa";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 const PetsAndSupplies = () => {
+  useDocumentTitle("Pets & Supplies");
   const [listings, setListings] = useState([]);
   const [filteredListings, setFilteredListings] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("All");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch("/listings.json")
@@ -14,8 +17,12 @@ const PetsAndSupplies = () => {
       .then((data) => {
         setListings(data);
         setFilteredListings(data);
+        setLoading(false);
       })
-      .catch((err) => console.error("Error loading listings:", err));
+      .catch((err) => {
+        console.error("Error loading listings:", err);
+        setLoading(false);
+      });
   }, []);
 
   useEffect(() => {
@@ -33,6 +40,14 @@ const PetsAndSupplies = () => {
 
     setFilteredListings(filtered);
   }, [searchQuery, categoryFilter, listings]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[60vh]">
+        <span className="loading loading-spinner loading-lg text-primary"></span>
+      </div>
+    );
+  }
 
   return (
     <div className="p-8 max-w-7xl mx-auto mt-10">

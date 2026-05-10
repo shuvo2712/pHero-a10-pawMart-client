@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 import { FaMapMarkerAlt, FaArrowRight, FaHeart, FaShieldAlt, FaStar } from "react-icons/fa";
 
 // Banner slides
@@ -58,14 +59,22 @@ const petHeroes = [
 ];
 
 const Home = () => {
+  useDocumentTitle("Home");
   const [listings, setListings] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch("/listings.json")
       .then((res) => res.json())
-      .then((data) => setListings(data))
-      .catch((err) => console.error("Error loading listings:", err));
+      .then((data) => {
+        setListings(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error loading listings:", err);
+        setLoading(false);
+      });
   }, []);
 
   // Carousel
@@ -78,6 +87,14 @@ const Home = () => {
 
   // Recent listings
   const recentListings = listings.slice(0, 6);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[60vh]">
+        <span className="loading loading-spinner loading-lg text-primary"></span>
+      </div>
+    );
+  }
 
   return (
     <div>

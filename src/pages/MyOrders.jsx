@@ -3,10 +3,12 @@ import { AuthContext } from "../providers/AuthProvider";
 import { FaDownload } from "react-icons/fa";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
+  useDocumentTitle("My Orders");
 
   useEffect(() => {
     const all = JSON.parse(localStorage.getItem("myOrders") || "[]");

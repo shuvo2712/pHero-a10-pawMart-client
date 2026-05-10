@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { FaMapMarkerAlt, FaEnvelope, FaCalendarAlt, FaChevronLeft, FaShoppingCart } from "react-icons/fa";
 import { AuthContext } from "../providers/AuthProvider";
 import toast from "react-hot-toast";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 const ListingDetails = () => {
   const { id } = useParams();
@@ -12,6 +13,7 @@ const ListingDetails = () => {
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [orderDone, setOrderDone] = useState(false);
+  useDocumentTitle(listing?.name);
 
   useEffect(() => {
     fetch("/listings.json")

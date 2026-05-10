@@ -2,9 +2,11 @@ import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import toast from "react-hot-toast";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 const MyListings = () => {
   const { user } = useContext(AuthContext);
+  useDocumentTitle("My Listings");
   const [listings, setListings] = useState([]);
   const [deleteId, setDeleteId] = useState(null);
   const [editListing, setEditListing] = useState(null);
