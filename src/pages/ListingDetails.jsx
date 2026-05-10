@@ -111,7 +111,7 @@ const ListingDetails = () => {
       {/* Order Modal */}
       {showModal && (
         <div className="modal modal-open">
-          <div className="modal-box rounded-3xl max-w-lg">
+          <div className="modal-box rounded-3xl max-w-2xl w-full">
             {!orderDone ? (
               <>
                 <h3 className="font-bold text-2xl mb-1">{isPet ? "Adoption Request" : "Place Order"}</h3>
@@ -127,11 +127,13 @@ const ListingDetails = () => {
                       category: listing.category,
                       price: listing.Price,
                       buyerEmail: user?.email || "",
-                      buyerName: form.buyerName.value,
-                      phone: form.phone.value,
+                      buyerName: user?.displayName || "",
+                      quantity: isPet ? 1 : Number(form.quantity.value),
                       address: form.address.value,
-                      quantity: form.quantity.value,
-                      date: new Date().toISOString().split("T")[0],
+                      date: form.date.value,
+                      phone: form.phone.value,
+                      notes: form.notes.value,
+                      orderedAt: new Date().toISOString().split("T")[0],
                     };
                     const existing = JSON.parse(localStorage.getItem("myOrders") || "[]");
                     existing.push(newOrder);
@@ -139,24 +141,60 @@ const ListingDetails = () => {
                     setOrderDone(true);
                     toast.success("Order placed successfully!");
                   }}
-                  className="space-y-4"
+                  className="space-y-3"
                 >
-                  <div className="form-control">
-                    <label className="label"><span className="label-text font-semibold">Your Name</span></label>
-                    <input name="buyerName" type="text" placeholder="Your Name" className="input input-bordered rounded-xl" />
+                  {/* Auto-fill readonly fields */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div className="form-control">
+                      <label className="label"><span className="label-text font-semibold">Buyer Name</span></label>
+                      <input type="text" value={user?.displayName || ""} readOnly className="input input-bordered rounded-xl bg-base-200 cursor-not-allowed" />
+                    </div>
+                    <div className="form-control">
+                      <label className="label"><span className="label-text font-semibold">Email</span></label>
+                      <input type="email" value={user?.email || ""} readOnly className="input input-bordered rounded-xl bg-base-200 cursor-not-allowed" />
+                    </div>
+                    <div className="form-control">
+                      <label className="label"><span className="label-text font-semibold">Listing ID</span></label>
+                      <input type="text" value={listing.id} readOnly className="input input-bordered rounded-xl bg-base-200 cursor-not-allowed" />
+                    </div>
+                    <div className="form-control">
+                      <label className="label"><span className="label-text font-semibold">Listing Name</span></label>
+                      <input type="text" value={listing.name} readOnly className="input input-bordered rounded-xl bg-base-200 cursor-not-allowed" />
+                    </div>
+                    <div className="form-control">
+                      <label className="label"><span className="label-text font-semibold">Quantity</span></label>
+                      {isPet ? (
+                        <input type="number" name="quantity" value={1} readOnly className="input input-bordered rounded-xl bg-base-200 cursor-not-allowed" />
+                      ) : (
+                        <input name="quantity" type="number" min="1" defaultValue="1" className="input input-bordered rounded-xl" />
+                      )}
+                    </div>
+                    <div className="form-control">
+                      <label className="label"><span className="label-text font-semibold">Price</span></label>
+                      <input type="text" value={listing.Price === 0 ? "Free" : `$${listing.Price}`} readOnly className="input input-bordered rounded-xl bg-base-200 cursor-not-allowed" />
+                    </div>
                   </div>
-                  <div className="form-control">
-                    <label className="label"><span className="label-text font-semibold">Phone Number</span></label>
-                    <input name="phone" type="text" placeholder="Phone Number" className="input input-bordered rounded-xl" />
+
+                  {/* Editable fields */}
+                  <div className="space-y-4 pt-2">
+                    <div className="form-control">
+                      <label className="block text-sm font-semibold mb-2">Delivery Address</label>
+                      <input name="address" type="text" placeholder="Delivery Address" className="input input-bordered rounded-xl w-full" />
+                    </div>
+                    <div className="form-control">
+                      <label className="block text-sm font-semibold mb-2">Pick Up / Date</label>
+                      <input name="date" type="date" className="input input-bordered rounded-xl w-full" />
+                    </div>
+                    <div className="form-control">
+                      <label className="block text-sm font-semibold mb-2">Phone Number</label>
+                      <input name="phone" type="text" placeholder="Phone Number" className="input input-bordered rounded-xl w-full" />
+                    </div>
+                    <div className="form-control">
+                      <label className="block text-sm font-semibold mb-2">Additional Notes</label>
+                      <textarea name="notes" rows="2" placeholder="Any special requests or notes..." className="textarea textarea-bordered rounded-xl resize-none w-full"></textarea>
+                    </div>
                   </div>
-                  <div className="form-control">
-                    <label className="label"><span className="label-text font-semibold">Delivery Address</span></label>
-                    <input name="address" type="text" placeholder="Delivery Address" className="input input-bordered rounded-xl" />
-                  </div>
-                  <div className="form-control">
-                    <label className="label"><span className="label-text font-semibold">Quantity</span></label>
-                    <input name="quantity" type="number" min="1" defaultValue="1" className="input input-bordered rounded-xl" />
-                  </div>
+
                   <div className="flex gap-3 pt-2">
                     <button type="button" onClick={() => setShowModal(false)} className="btn btn-outline flex-1 rounded-xl">Cancel</button>
                     <button type="submit" className={`btn flex-1 rounded-xl text-white ${isPet ? 'btn-success' : 'btn-primary'}`}>
