@@ -16,11 +16,10 @@ const ListingDetails = () => {
   useDocumentTitle(listing?.name);
 
   useEffect(() => {
-    fetch("/listings.json")
+    fetch(`${import.meta.env.VITE_API_URL}/listings/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        const item = data.find((l) => l.id === id);
-        setListing(item);
+        setListing(data);
         setLoading(false);
       })
       .catch((err) => {
@@ -125,7 +124,7 @@ const ListingDetails = () => {
                     const newOrder = {
                       id: Date.now().toString(),
                       listingName: listing.name,
-                      listingId: listing.id,
+                      listingId: listing._id,
                       category: listing.category,
                       price: listing.Price,
                       buyerEmail: user?.email || "",
@@ -157,7 +156,7 @@ const ListingDetails = () => {
                     </div>
                     <div className="form-control">
                       <label className="label"><span className="label-text font-semibold">Listing ID</span></label>
-                      <input type="text" value={listing.id} readOnly className="input input-bordered rounded-xl bg-base-200 cursor-not-allowed" />
+                      <input type="text" value={listing._id} readOnly className="input input-bordered rounded-xl bg-base-200 cursor-not-allowed" />
                     </div>
                     <div className="form-control">
                       <label className="label"><span className="label-text font-semibold">Listing Name</span></label>

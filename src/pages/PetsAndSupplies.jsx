@@ -13,7 +13,7 @@ const PetsAndSupplies = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3000/listings")
+    fetch(`${import.meta.env.VITE_API_URL}/listings`)
       .then((res) => res.json())
       .then((data) => {
         setListings(data);
