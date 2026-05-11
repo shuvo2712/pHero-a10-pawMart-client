@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import useDocumentTitle from "../hooks/useDocumentTitle";
 import { FaMapMarkerAlt, FaArrowRight, FaHeart, FaShieldAlt, FaStar } from "react-icons/fa";
+import { useTypewriter, Cursor } from "react-simple-typewriter";
 
 // Banner slides
 const bannerSlides = [
@@ -64,6 +65,12 @@ const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loading, setLoading] = useState(true);
 
+  const [text] = useTypewriter({
+    words: ["Find Your Furry Friend!", "Adopt, Don't Shop.", "Browse Pet Supplies!", "Give a Pet a Second Chance."],
+    loop: true,
+    delaySpeed: 2000,
+  });
+
   useEffect(() => {
     fetch("/listings.json")
       .then((res) => res.json())
@@ -107,7 +114,13 @@ const Home = () => {
           >
             <img src={slide.image} alt={slide.tagline} className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-white text-center px-6">
-              <h1 className="text-3xl md:text-6xl font-black mb-4 drop-shadow-lg">{slide.tagline}</h1>
+              <h1 className="text-3xl md:text-6xl font-black mb-4 drop-shadow-lg min-h-[1.2em]">
+                {index === 0 ? (
+                  <span>{text}<Cursor cursorColor="#fff" /></span>
+                ) : (
+                  slide.tagline
+                )}
+              </h1>
               <p className="text-lg md:text-2xl mb-8 text-white/80 max-w-xl">{slide.sub}</p>
               <Link to="/pets-and-supplies" className="btn btn-primary btn-lg text-white rounded-full px-10 shadow-xl">
                 Explore Now <FaArrowRight className="ml-2" />
