@@ -13,7 +13,7 @@ const PetsAndSupplies = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/listings.json")
+    fetch("http://localhost:3000/listings")
       .then((res) => res.json())
       .then((data) => {
         setListings(data);
@@ -84,7 +84,7 @@ const PetsAndSupplies = () => {
       {/* Product Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredListings.map((item) => (
-          <div key={item.id} className="card bg-base-100 shadow-lg border border-base-200 hover:shadow-xl transition-shadow duration-300">
+          <div key={item._id} className="card bg-base-100 shadow-lg border border-base-200 hover:shadow-xl transition-shadow duration-300">
             <figure>
               <img src={item.image} alt={item.name} className="w-full h-52 object-cover" />
             </figure>
@@ -109,7 +109,7 @@ const PetsAndSupplies = () => {
                 <span>{item.location}</span>
               </div>
               <div className="card-actions mt-4">
-                <Link to={`/listing-details/${item.id}`} className="btn btn-primary btn-sm w-full rounded-xl">
+                <Link to={`/listing-details/${item._id}`} className="btn btn-primary btn-sm w-full rounded-xl">
                   See Details
                 </Link>
               </div>
