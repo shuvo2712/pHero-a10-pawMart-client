@@ -1,9 +1,20 @@
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
+import { FaSun, FaMoon } from 'react-icons/fa';
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
 
   const navLinks = (
     <>
@@ -46,7 +57,16 @@ const Navbar = () => {
       </div>
 
       {/* Right: Authentication / Profile */}
-      <div className="navbar-end">
+      <div className="navbar-end gap-2 md:gap-4">
+        {/* Theme Toggle */}
+        <button 
+          onClick={toggleTheme}
+          className="btn btn-ghost btn-circle text-xl"
+          title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+        >
+          {theme === "light" ? <FaMoon className="text-gray-600" /> : <FaSun className="text-yellow-400" />}
+        </button>
+
         {user ? (
           <div className="flex items-center gap-3">
             <div className="avatar" title={user?.displayName}>
@@ -54,12 +74,14 @@ const Navbar = () => {
                 <img alt="User Avatar" src={user?.photoURL || "https://i.ibb.co/5GzXkwq/user.png"} />
               </div>
             </div>
-            <button onClick={logout} className="btn btn-outline btn-error btn-sm">Logout</button>
+            <button onClick={logout} className="btn btn-outline btn-error btn-sm hidden md:flex">Logout</button>
+            {/* Mobile Logout Icon */}
+            <button onClick={logout} className="btn btn-ghost btn-xs text-error md:hidden">Logout</button>
           </div>
         ) : (
           <div className="flex gap-2">
-            <Link to="/login" className="btn btn-outline btn-primary">Login</Link>
-            <Link to="/register" className="btn btn-primary">Register</Link>
+            <Link to="/login" className="btn btn-outline btn-primary btn-sm md:btn-md">Login</Link>
+            <Link to="/register" className="btn btn-primary btn-sm md:btn-md hidden sm:flex">Register</Link>
           </div>
         )}
       </div>
