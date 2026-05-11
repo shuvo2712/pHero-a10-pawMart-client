@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import useDocumentTitle from "../hooks/useDocumentTitle";
 import { FaMapMarkerAlt, FaArrowRight, FaHeart, FaShieldAlt, FaStar } from "react-icons/fa";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
+import { Tooltip } from "react-tooltip";
 
 // Banner slides
 const bannerSlides = [
@@ -175,7 +176,15 @@ const Home = () => {
                   <div className="flex justify-between items-start">
                     <span className="badge badge-secondary badge-outline text-xs">{item.category}</span>
                     <span className="font-bold text-primary text-lg">
-                      {item.Price === 0 ? <span className="text-success">Free</span> : `$${item.Price}`}
+                      {item.Price === 0 ? (
+                        <span 
+                          className="text-success" 
+                          data-tooltip-id="free-badge-tip"
+                          data-tooltip-content="This pet is available for free adoption"
+                        >
+                          Free
+                        </span>
+                      ) : `$${item.Price}`}
                     </span>
                   </div>
                   <h3 className="card-title text-lg mt-2">{item.name}</h3>
@@ -246,6 +255,8 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      <Tooltip id="free-badge-tip" place="top" />
     </div>
   );
 };

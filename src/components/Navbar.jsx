@@ -32,7 +32,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar bg-base-100 shadow-sm px-4 md:px-8">
+    <div className="navbar bg-base-100 shadow-sm px-4 md:px-8 sticky top-0 z-[100]">
       {/* Left: Logo + Website Name */}
       <div className="navbar-start">
         <div className="dropdown">
@@ -45,9 +45,15 @@ const Navbar = () => {
             {navLinks}
           </ul>
         </div>
-        <Link to="/" className="btn btn-ghost text-2xl font-bold text-primary flex gap-2 items-center">
+        <Link 
+          to="/" 
+          className="btn btn-ghost text-2xl font-bold text-primary flex gap-2 items-center"
+          data-tooltip-id="logo-tip"
+          data-tooltip-content="Go to Home"
+        >
           🐾 PawMart
         </Link>
+        <Tooltip id="logo-tip" place="bottom" />
       </div>
 
       {/* Middle: Navigation Links (Desktop) */}

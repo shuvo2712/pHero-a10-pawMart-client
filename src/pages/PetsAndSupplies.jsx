@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaMapMarkerAlt, FaSearch } from "react-icons/fa";
 import useDocumentTitle from "../hooks/useDocumentTitle";
+import { Tooltip } from "react-tooltip";
 
 const PetsAndSupplies = () => {
   useDocumentTitle("Pets & Supplies");
@@ -91,7 +92,15 @@ const PetsAndSupplies = () => {
               <div className="flex justify-between items-start">
                 <span className="badge badge-secondary badge-outline text-xs whitespace-nowrap">{item.category}</span>
                 <span className="font-bold text-primary text-lg">
-                  {item.Price === 0 ? <span className="text-success">Free</span> : `$${item.Price}`}
+                  {item.Price === 0 ? (
+                    <span 
+                      className="text-success" 
+                      data-tooltip-id="free-badge-tip"
+                      data-tooltip-content="This pet is available for free adoption"
+                    >
+                      Free
+                    </span>
+                  ) : `$${item.Price}`}
                 </span>
               </div>
               <h3 className="card-title text-lg mt-2">{item.name}</h3>
@@ -121,6 +130,8 @@ const PetsAndSupplies = () => {
           </button>
         </div>
       )}
+
+      <Tooltip id="free-badge-tip" place="top" />
     </div>
   );
 };

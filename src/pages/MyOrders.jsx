@@ -4,6 +4,7 @@ import { FaDownload } from "react-icons/fa";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import useDocumentTitle from "../hooks/useDocumentTitle";
+import { Tooltip } from "react-tooltip";
 
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
@@ -44,11 +45,18 @@ const MyOrders = () => {
           <p className="text-base-content/50">All your adoption requests and product orders.</p>
         </div>
         {orders.length > 0 && (
-          <button onClick={handleDownload} className="btn btn-primary rounded-xl flex items-center gap-2">
+          <button 
+            onClick={handleDownload} 
+            className="btn btn-primary rounded-xl flex items-center gap-2"
+            data-tooltip-id="download-tip"
+            data-tooltip-content="Export your orders as a PDF file"
+          >
             <FaDownload /> Download Report
           </button>
         )}
       </div>
+
+      <Tooltip id="download-tip" place="left" />
 
       {orders.length === 0 ? (
         <div className="text-center py-20 text-base-content/40">
