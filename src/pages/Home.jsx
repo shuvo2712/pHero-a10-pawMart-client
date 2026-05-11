@@ -92,7 +92,7 @@ const Home = () => {
   });
 
   useEffect(() => {
-    fetch("/listings.json")
+    fetch(`${import.meta.env.VITE_API_URL}/listings/latest`)
       .then((res) => res.json())
       .then((data) => {
         setListings(data);
@@ -113,7 +113,7 @@ const Home = () => {
   }, []);
 
   // Recent listings
-  const recentListings = listings.slice(0, 6);
+  const recentListings = listings;
 
   if (loading) {
     return (
@@ -209,7 +209,7 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {recentListings.map((item, index) => (
               <motion.div 
-                key={item.id}
+                key={item._id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
@@ -240,7 +240,7 @@ const Home = () => {
                     <span>{item.location}</span>
                   </div>
                   <div className="card-actions mt-4">
-                    <Link to={`/listing-details/${item.id}`} className="btn btn-primary btn-sm w-full rounded-xl">
+                    <Link to={`/listing-details/${item._id}`} className="btn btn-primary btn-sm w-full rounded-xl">
                       See Details
                     </Link>
                   </div>

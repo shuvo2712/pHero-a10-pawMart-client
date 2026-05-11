@@ -45,14 +45,14 @@
   },
   {
     "id": "05",
-    "name": "Persian Cat",
-    "category": "Pets",
-    "Price": 0,
-    "location": "Dhaka",
-    "description": "Beautiful 1-year-old Persian cat looking for a loving home.",
+    "name": "Pet Grooming Kit",
+    "category": "Pet Care Products",
+    "Price": 55,
+    "location": "Sylhet",
+    "description": "Complete professional grooming set with clippers and brushes.",
     "image": "/images/listing_05.png",
-    "email": "rescue@pets.org",
-    "date": "2025-10-31"
+    "email": "groomers@gmail.com",
+    "date": "2025-11-07"
   },
   {
     "id": "06",
@@ -122,13 +122,13 @@
   },
   {
     "id": "12",
-    "name": "Pet Grooming Kit",
-    "category": "Pet Care Products",
-    "Price": 55,
-    "location": "Sylhet",
-    "description": "Complete professional grooming set with clippers and brushes.",
+    "name": "Persian Cat",
+    "category": "Pets",
+    "Price": 0,
+    "location": "Dhaka",
+    "description": "Beautiful 1-year-old Persian cat looking for a loving home.",
     "image": "/images/listing_12.png",
-    "email": "groomers@gmail.com",
-    "date": "2025-11-07"
+    "email": "rescue@pets.org",
+    "date": "2025-10-31"
   }
 ]
