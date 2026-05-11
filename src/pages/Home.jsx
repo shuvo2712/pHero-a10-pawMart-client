@@ -60,18 +60,6 @@ const petHeroes = [
   },
 ];
 
-const BannerHeading = ({ text }) => {
-  const [typewrittenText] = useTypewriter({
-    words: [text],
-    loop: true,
-    delaySpeed: 1000,
-  });
-
-  return (
-    <span>{typewrittenText}<Cursor cursorColor="#fff" /></span>
-  );
-};
-
 const Home = () => {
   useDocumentTitle("Home");
   const [listings, setListings] = useState([]);
@@ -81,25 +69,25 @@ const Home = () => {
   const [whyText] = useTypewriter({
     words: ["Why Adopt from PawMart?"],
     loop: true,
-    delaySpeed: 2000,
+    delaySpeed: 1000,
   });
 
   const [categoryText] = useTypewriter({
     words: ["Browse by Category"],
     loop: true,
-    delaySpeed: 2000,
+    delaySpeed: 1000,
   });
 
   const [recentText] = useTypewriter({
     words: ["Recent Listings"],
     loop: true,
-    delaySpeed: 2000,
+    delaySpeed: 1000,
   });
 
   const [heroesText] = useTypewriter({
     words: ["Meet Our Pet Heroes"],
     loop: true,
-    delaySpeed: 2000,
+    delaySpeed: 1000,
   });
 
   useEffect(() => {
@@ -145,8 +133,8 @@ const Home = () => {
           >
             <img src={slide.image} alt={slide.tagline} className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-white text-center px-6">
-              <h1 className="text-3xl md:text-6xl font-black mb-4 drop-shadow-lg min-h-[1.2em]">
-                <BannerHeading key={currentSlide} text={slide.tagline} />
+              <h1 className="text-3xl md:text-6xl font-black mb-4 drop-shadow-lg">
+                {slide.tagline}
               </h1>
               <p className="text-lg md:text-2xl mb-8 text-white/80 max-w-xl">{slide.sub}</p>
               <Link to="/pets-and-supplies" className="btn btn-primary btn-lg text-white rounded-full px-10 shadow-xl">
