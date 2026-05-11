@@ -88,7 +88,7 @@ const MyListings = () => {
                     <img src={item.image} alt={item.name} className="w-14 h-14 object-cover rounded-xl" />
                   </td>
                   <td className="font-semibold">{item.name}</td>
-                  <td><span className="badge badge-outline badge-secondary">{item.category}</span></td>
+                  <td><span className="badge badge-outline badge-secondary whitespace-nowrap">{item.category}</span></td>
                   <td className="font-bold text-primary">{item.Price === 0 ? <span className="text-success">Free</span> : `$${item.Price}`}</td>
                   <td>{item.location}</td>
                   <td>{item.date}</td>

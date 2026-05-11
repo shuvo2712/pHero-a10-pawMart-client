@@ -54,7 +54,7 @@ const CategoryProducts = () => {
               </figure>
               <div className="card-body p-5">
                 <div className="flex justify-between items-start">
-                  <span className="badge badge-secondary badge-outline text-xs">{item.category}</span>
+                  <span className="badge badge-secondary badge-outline text-xs whitespace-nowrap">{item.category}</span>
                   <span className="font-bold text-primary text-lg">
                     {item.Price === 0 ? <span className="text-success">Free</span> : `$${item.Price}`}
                   </span>
