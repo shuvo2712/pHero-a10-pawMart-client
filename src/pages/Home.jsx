@@ -4,6 +4,7 @@ import useDocumentTitle from "../hooks/useDocumentTitle";
 import { FaMapMarkerAlt, FaArrowRight, FaHeart, FaShieldAlt, FaStar } from "react-icons/fa";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
 import { Tooltip } from "react-tooltip";
+import { motion } from "framer-motion";
 
 // Banner slides
 const bannerSlides = [
@@ -157,36 +158,64 @@ const Home = () => {
       </div>
 
       {/* CATEGORY SECTION */}
-      <section className="max-w-7xl mx-auto px-6 py-16">
+      <motion.section 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="max-w-7xl mx-auto px-6 py-16"
+      >
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-2 min-h-[1.2em]">
           {categoryText}<Cursor cursorColor="hsl(var(--p))" />
         </h2>
         <p className="text-center text-base-content/50 mb-10">Find exactly what your pet needs</p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {categories.map((cat) => (
-            <Link
+          {categories.map((cat, index) => (
+            <motion.div
               key={cat.name}
-              to={`/category-filtered-product/${cat.name}`}
-              className={`${cat.color} rounded-3xl p-6 text-center hover:scale-105 transition-transform duration-200 border border-base-200 shadow-sm group`}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: index * 0.1 }}
+              viewport={{ once: true }}
             >
-              <div className="text-5xl mb-3">{cat.icon}</div>
-              <h3 className="font-bold text-lg mb-1">{cat.name}</h3>
-              <p className="text-sm text-base-content/60">{cat.desc}</p>
-            </Link>
+              <Link
+                to={`/category-filtered-product/${cat.name}`}
+                className={`${cat.color} rounded-3xl p-6 text-center hover:scale-105 transition-transform duration-200 border border-base-200 shadow-sm group block h-full`}
+              >
+                <div className="text-5xl mb-3">{cat.icon}</div>
+                <h3 className="font-bold text-lg mb-1">{cat.name}</h3>
+                <p className="text-sm text-base-content/60">{cat.desc}</p>
+              </Link>
+            </motion.div>
           ))}
         </div>
-      </section>
+      </motion.section>
 
       {/* RECENT LISTINGS */}
       <section className="bg-base-200/50 py-16">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-2 min-h-[1.2em]">
-            {recentText}<Cursor cursorColor="hsl(var(--p))" />
-          </h2>
-          <p className="text-center text-base-content/50 mb-10">Freshly posted pets & supplies</p>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2 min-h-[1.2em]">
+              {recentText}<Cursor cursorColor="hsl(var(--p))" />
+            </h2>
+            <p className="text-center text-base-content/50 mb-10">Freshly posted pets & supplies</p>
+          </motion.div>
+          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {recentListings.map((item) => (
-              <div key={item.id} className="card bg-base-100 shadow-lg border border-base-200 hover:shadow-xl transition-shadow duration-300">
+            {recentListings.map((item, index) => (
+              <motion.div 
+                key={item.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="card bg-base-100 shadow-lg border border-base-200 hover:shadow-xl transition-shadow duration-300"
+              >
                 <figure>
                   <img src={item.image} alt={item.name} className="w-full h-52 object-cover" />
                 </figure>
@@ -216,7 +245,7 @@ const Home = () => {
                     </Link>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
           <div className="text-center mt-10">
@@ -228,7 +257,13 @@ const Home = () => {
       </section>
 
       {/* WHY ADOPT FROM PAWMART */}
-      <section className="max-w-7xl mx-auto px-6 py-16">
+      <motion.section 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="max-w-7xl mx-auto px-6 py-16"
+      >
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-2 min-h-[1.2em]">
           {whyText}<Cursor cursorColor="hsl(var(--p))" />
         </h2>
@@ -252,18 +287,33 @@ const Home = () => {
             <p className="text-base-content/60">Join a community of thousands of pet lovers who believe in rescuing and rehoming animals with love and care.</p>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* MEET OUR PET HEROES */}
-      <section className="bg-base-200/50 py-16">
+      <section className="bg-base-200/50 py-16 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-2 min-h-[1.2em]">
-            {heroesText}<Cursor cursorColor="hsl(var(--p))" />
-          </h2>
-          <p className="text-center text-base-content/50 mb-10">Real people, real stories, real love</p>
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2 min-h-[1.2em]">
+              {heroesText}<Cursor cursorColor="hsl(var(--p))" />
+            </h2>
+            <p className="text-center text-base-content/50 mb-10">Real people, real stories, real love</p>
+          </motion.div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {petHeroes.map((hero) => (
-              <div key={hero.id} className="card bg-base-100 border border-base-200 shadow-md p-6 text-center">
+            {petHeroes.map((hero, index) => (
+              <motion.div 
+                key={hero.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.2 }}
+                viewport={{ once: true }}
+                className="card bg-base-100 border border-base-200 shadow-md p-6 text-center"
+              >
                 <img
                   src={hero.image}
                   alt={hero.name}
@@ -272,7 +322,7 @@ const Home = () => {
                 <h3 className="font-bold text-lg">{hero.name}</h3>
                 <p className="text-primary text-sm font-medium mb-3">{hero.pet}</p>
                 <p className="text-base-content/60 text-sm italic">"{hero.quote}"</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
