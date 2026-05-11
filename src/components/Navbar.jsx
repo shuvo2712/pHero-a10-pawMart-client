@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
 import { FaSun, FaMoon } from 'react-icons/fa';
+import { Tooltip } from 'react-tooltip';
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
@@ -69,14 +70,17 @@ const Navbar = () => {
 
         {user ? (
           <div className="flex items-center gap-3">
-            <div className="avatar" title={user?.displayName}>
+            <div
+              className="avatar"
+              data-tooltip-id="user-avatar-tip"
+              data-tooltip-content={user?.displayName || user?.email}
+            >
               <div className="w-10 rounded-full border border-primary">
                 <img alt="User Avatar" src={user?.photoURL || "https://i.ibb.co/5GzXkwq/user.png"} />
               </div>
             </div>
-            <button onClick={logout} className="btn btn-outline btn-error btn-sm hidden md:flex">Logout</button>
-            {/* Mobile Logout Icon */}
-            <button onClick={logout} className="btn btn-ghost btn-xs text-error md:hidden">Logout</button>
+            <Tooltip id="user-avatar-tip" place="bottom" />
+            <button onClick={logout} className="btn btn-outline btn-error btn-sm">Logout</button>
           </div>
         ) : (
           <div className="flex gap-2">

@@ -3,6 +3,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import toast from "react-hot-toast";
 import useDocumentTitle from "../hooks/useDocumentTitle";
+import { Tooltip } from "react-tooltip";
 
 const MyListings = () => {
   const { user } = useContext(AuthContext);
@@ -95,12 +96,16 @@ const MyListings = () => {
                   <td>
                     <div className="flex gap-2">
                       <button
+                        data-tooltip-id="edit-tip"
+                        data-tooltip-content="Edit Listing"
                         onClick={() => setEditListing(item)}
                         className="btn btn-sm btn-outline btn-primary rounded-lg"
                       >
                         <FaEdit />
                       </button>
                       <button
+                        data-tooltip-id="delete-tip"
+                        data-tooltip-content="Delete Listing"
                         onClick={() => setDeleteId(item.id)}
                         className="btn btn-sm btn-outline btn-error rounded-lg"
                       >
@@ -114,6 +119,10 @@ const MyListings = () => {
           </table>
         </div>
       )}
+
+      {/* Tooltips */}
+      <Tooltip id="edit-tip" place="top" />
+      <Tooltip id="delete-tip" place="top" />
 
       {/* DELETE MODAL */}
       {deleteId && (
