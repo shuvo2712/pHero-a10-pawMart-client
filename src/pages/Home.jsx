@@ -16,7 +16,7 @@ const bannerSlides = [
   {
     id: 2,
     image: "https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&q=80&w=1200",
-    tagline: "Adopt, Don't Shop",
+    tagline: "Adopt, Don’t Shop — Give a Pet a Home.",
     sub: "Give a rescued pet a forever home and a second chance.",
   },
   {
@@ -60,14 +60,44 @@ const petHeroes = [
   },
 ];
 
+const BannerHeading = ({ text }) => {
+  const [typewrittenText] = useTypewriter({
+    words: [text],
+    loop: true,
+    delaySpeed: 1000,
+  });
+
+  return (
+    <span>{typewrittenText}<Cursor cursorColor="#fff" /></span>
+  );
+};
+
 const Home = () => {
   useDocumentTitle("Home");
   const [listings, setListings] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  const [text] = useTypewriter({
-    words: ["Find Your Furry Friend!", "Adopt, Don't Shop.", "Browse Pet Supplies!", "Give a Pet a Second Chance."],
+  const [whyText] = useTypewriter({
+    words: ["Why Adopt from PawMart?"],
+    loop: true,
+    delaySpeed: 2000,
+  });
+
+  const [categoryText] = useTypewriter({
+    words: ["Browse by Category"],
+    loop: true,
+    delaySpeed: 2000,
+  });
+
+  const [recentText] = useTypewriter({
+    words: ["Recent Listings"],
+    loop: true,
+    delaySpeed: 2000,
+  });
+
+  const [heroesText] = useTypewriter({
+    words: ["Meet Our Pet Heroes"],
     loop: true,
     delaySpeed: 2000,
   });
@@ -116,11 +146,7 @@ const Home = () => {
             <img src={slide.image} alt={slide.tagline} className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-white text-center px-6">
               <h1 className="text-3xl md:text-6xl font-black mb-4 drop-shadow-lg min-h-[1.2em]">
-                {index === 0 ? (
-                  <span>{text}<Cursor cursorColor="#fff" /></span>
-                ) : (
-                  slide.tagline
-                )}
+                <BannerHeading key={currentSlide} text={slide.tagline} />
               </h1>
               <p className="text-lg md:text-2xl mb-8 text-white/80 max-w-xl">{slide.sub}</p>
               <Link to="/pets-and-supplies" className="btn btn-primary btn-lg text-white rounded-full px-10 shadow-xl">
@@ -144,7 +170,9 @@ const Home = () => {
 
       {/* CATEGORY SECTION */}
       <section className="max-w-7xl mx-auto px-6 py-16">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">Browse by Category</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-2 min-h-[1.2em]">
+          {categoryText}<Cursor cursorColor="hsl(var(--p))" />
+        </h2>
         <p className="text-center text-base-content/50 mb-10">Find exactly what your pet needs</p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {categories.map((cat) => (
@@ -164,7 +192,9 @@ const Home = () => {
       {/* RECENT LISTINGS */}
       <section className="bg-base-200/50 py-16">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">Recent Listings</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-2 min-h-[1.2em]">
+            {recentText}<Cursor cursorColor="hsl(var(--p))" />
+          </h2>
           <p className="text-center text-base-content/50 mb-10">Freshly posted pets & supplies</p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {recentListings.map((item) => (
@@ -211,7 +241,9 @@ const Home = () => {
 
       {/* WHY ADOPT FROM PAWMART */}
       <section className="max-w-7xl mx-auto px-6 py-16">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">Why Adopt from PawMart?</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-2 min-h-[1.2em]">
+          {whyText}<Cursor cursorColor="hsl(var(--p))" />
+        </h2>
         <p className="text-center text-base-content/50 mb-12 max-w-xl mx-auto">
           Every pet on PawMart is waiting for a second chance. By adopting, you are not just saving one life — you are making room for another rescue.
         </p>
@@ -237,7 +269,9 @@ const Home = () => {
       {/* MEET OUR PET HEROES */}
       <section className="bg-base-200/50 py-16">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">Meet Our Pet Heroes</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-2 min-h-[1.2em]">
+            {heroesText}<Cursor cursorColor="hsl(var(--p))" />
+          </h2>
           <p className="text-center text-base-content/50 mb-10">Real people, real stories, real love</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {petHeroes.map((hero) => (
