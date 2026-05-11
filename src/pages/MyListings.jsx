@@ -11,12 +11,18 @@ const MyListings = () => {
   const [listings, setListings] = useState([]);
   const [deleteId, setDeleteId] = useState(null);
   const [editListing, setEditListing] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   // Load listings
   useEffect(() => {
-    const all = JSON.parse(localStorage.getItem("myListings") || "[]");
-    const mine = all.filter((item) => item.email === (user?.email || ""));
-    setListings(mine);
+    setLoading(true);
+    const timer = setTimeout(() => {
+      const all = JSON.parse(localStorage.getItem("myListings") || "[]");
+      const mine = all.filter((item) => item.email === (user?.email || ""));
+      setListings(mine);
+      setLoading(false);
+    }, 500);
+    return () => clearTimeout(timer);
   }, [user]);
 
   // Delete handler
@@ -56,6 +62,14 @@ const MyListings = () => {
     setEditListing(null);
     toast.success("Listing updated!");
   };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[60vh]">
+        <span className="loading loading-spinner loading-lg text-primary"></span>
+      </div>
+    );
+  }
 
   return (
     <div className="p-6 md:p-10 max-w-7xl mx-auto mt-6 mb-20">

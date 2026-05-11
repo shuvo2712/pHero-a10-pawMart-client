@@ -9,12 +9,18 @@ import { Tooltip } from "react-tooltip";
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
   useDocumentTitle("My Orders");
 
   useEffect(() => {
-    const all = JSON.parse(localStorage.getItem("myOrders") || "[]");
-    const mine = all.filter((o) => o.buyerEmail === (user?.email || ""));
-    setOrders(mine);
+    setLoading(true);
+    const timer = setTimeout(() => {
+      const all = JSON.parse(localStorage.getItem("myOrders") || "[]");
+      const mine = all.filter((o) => o.buyerEmail === (user?.email || ""));
+      setOrders(mine);
+      setLoading(false);
+    }, 500);
+    return () => clearTimeout(timer);
   }, [user]);
 
   const handleDownload = () => {
@@ -36,6 +42,14 @@ const MyOrders = () => {
     });
     doc.save("my-orders.pdf");
   };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[60vh]">
+        <span className="loading loading-spinner loading-lg text-primary"></span>
+      </div>
+    );
+  }
 
   return (
     <div className="p-6 md:p-10 max-w-7xl mx-auto mt-6 mb-20">
