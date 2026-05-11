@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 const NotFound = () => {
+  useDocumentTitle("404 Not Found");
   const [text] = useTypewriter({
     words: ["Oops! Page Not Found."],
     loop: true,
