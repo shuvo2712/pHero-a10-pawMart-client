@@ -1,16 +1,20 @@
-# React + Vite
+# 🐾 PawMart — Pet Adoption & Supply Client Portal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to **PawMart**, a modern and user-friendly web portal designed for pet adoptions and pet care supplies. This platform connects pet lovers, local pet owners, and shops to list pets for adoption and buy/sell high-quality pet products.
 
-Currently, two official plugins are available:
+* **Live Website URL (Client):** 
+https://phero-a10-pawmart.netlify.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* **Live Server URL:** 
+https://phero-a10-pawmart-server.vercel.app
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### ✨ Key Features of PawMart
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* **🐾 Live MongoDB MERN CRUD workflows:** Allows registered users to easily list pets/supplies, update their own items using interactive update modals, and safely delete listings with confirmation prompts.
+* **🌓 Seamless Light & Dark Mode:** Integrates an aesthetic toggle switcher inside the navbar, instantly updating the theme and saving the user's choice to local storage.
+* **📊 One-Click PDF Report Generator:** Allows buyers to download their adoption and supply orders instantly as a clean, professionally formatted PDF report.
+* **🔍 Instant Name Search & Category Filters:** Enables users to search listings by name or filter them by category dropdowns (`Pets`, `Pet Food`, `Accessories`, `Pet Care Products`) in real-time.
+* **🔐 Secure Firebase Email & Google Authentication:** Protects user routes with comprehensive email-password validation checks and single-click Google Sign-in.
+* **📱 Responsive Layout & Micro-Animations:** Highly polished desktop, tablet, and mobile views built using DaisyUI, custom typewriter headers, and interactive hover effects.
