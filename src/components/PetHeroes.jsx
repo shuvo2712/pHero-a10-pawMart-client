@@ -29,6 +29,8 @@ const PetHeroes = () => {
   const [heroesText] = useTypewriter({
     words: ["Meet Our Pet Heroes"],
     loop: true,
+    typeSpeed: 80,
+    deleteSpeed: 30,
     delaySpeed: 1000,
   });
 

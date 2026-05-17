@@ -7,6 +7,8 @@ const RecentListings = ({ listings }) => {
   const [recentText] = useTypewriter({
     words: ["Recent Listings"],
     loop: true,
+    typeSpeed: 80,
+    deleteSpeed: 30,
     delaySpeed: 1000,
   });
 

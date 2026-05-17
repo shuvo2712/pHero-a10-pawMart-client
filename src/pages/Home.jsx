@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import useDocumentTitle from "../hooks/useDocumentTitle";
 import { Tooltip } from "react-tooltip";
-
-// Import modular home sub-sections
 import Banner from "../components/Banner";
 import CategorySection from "../components/CategorySection";
 import RecentListings from "../components/RecentListings";

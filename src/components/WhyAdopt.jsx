@@ -6,6 +6,8 @@ const WhyAdopt = () => {
   const [whyText] = useTypewriter({
     words: ["Why Adopt from PawMart?"],
     loop: true,
+    typeSpeed: 80,
+    deleteSpeed: 30,
     delaySpeed: 1000,
   });
 

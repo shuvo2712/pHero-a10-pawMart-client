@@ -13,6 +13,8 @@ const CategorySection = () => {
   const [categoryText] = useTypewriter({
     words: ["Browse by Category"],
     loop: true,
+    typeSpeed: 80,
+    deleteSpeed: 30,
     delaySpeed: 1000,
   });
 

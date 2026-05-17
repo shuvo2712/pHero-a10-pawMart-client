@@ -7,6 +7,8 @@ const NotFound = () => {
   const [text] = useTypewriter({
     words: ["Oops! Page Not Found."],
     loop: true,
+    typeSpeed: 80,
+    deleteSpeed: 30,
     delaySpeed: 1000,
   });
   return (
