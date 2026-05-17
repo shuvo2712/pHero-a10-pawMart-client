@@ -15,7 +15,6 @@ const AddListing = () => {
     const form = e.target;
 
     const newListing = {
-      id: Date.now().toString(),
       name: form.name.value,
       category: form.category.value,
       Price: Number(form.price.value),
@@ -26,14 +25,27 @@ const AddListing = () => {
       email: user?.email || "",
     };
 
-    // Save to localStorage
-    const existing = JSON.parse(localStorage.getItem("myListings") || "[]");
-    existing.push(newListing);
-    localStorage.setItem("myListings", JSON.stringify(existing));
-
-    toast.success("Listing added successfully!");
-    form.reset();
-    navigate("/my-listings");
+    fetch(`${import.meta.env.VITE_API_URL}/listings`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newListing),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          toast.success("Listing added successfully!");
+          form.reset();
+          navigate("/my-listings");
+        } else {
+          toast.error("Failed to add listing.");
+        }
+      })
+      .catch((err) => {
+        console.error("Error adding listing:", err);
+        toast.error("An error occurred. Please try again.");
+      });
   };
 
   return (
