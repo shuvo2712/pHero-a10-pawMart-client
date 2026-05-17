@@ -35,7 +35,7 @@ const MyOrders = () => {
       head: [["#", "Listing Name", "Buyer Name", "Price", "Qty", "Address", "Date", "Phone"]],
       body: orders.map((order, index) => [
         index + 1,
-        order.listingName,
+        order.productName,
         order.buyerName,
         order.price === 0 ? "Free" : `$${order.price}`,
         order.quantity,
@@ -99,7 +99,7 @@ const MyOrders = () => {
               {orders.map((order, index) => (
                 <tr key={order._id} className="hover">
                   <td>{index + 1}</td>
-                  <td className="font-semibold">{order.listingName}</td>
+                  <td className="font-semibold">{order.productName}</td>
                   <td>{order.buyerName}</td>
                   <td className="font-bold text-primary">
                     {order.price === 0 ? <span className="text-success">Free</span> : `$${order.price}`}

@@ -122,18 +122,16 @@ const ListingDetails = () => {
                     e.preventDefault();
                     const form = e.target;
                     const newOrder = {
-                      listingName: listing.name,
-                      listingId: listing._id,
-                      category: listing.category,
-                      price: listing.price,
-                      buyerEmail: user?.email || "",
+                      productId: listing._id,
+                      productName: listing.name,
                       buyerName: user?.displayName || "",
+                      email: user?.email || "",
                       quantity: isPet ? 1 : Number(form.quantity.value),
+                      price: listing.price,
                       address: form.address.value,
-                      date: form.date.value,
                       phone: form.phone.value,
-                      notes: form.notes.value,
-                      orderedAt: new Date().toISOString().split("T")[0],
+                      date: form.date.value,
+                      additionalNotes: form.notes.value,
                     };
 
                     fetch(`${import.meta.env.VITE_API_URL}/orders`, {
