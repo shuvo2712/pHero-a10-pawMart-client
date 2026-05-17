@@ -59,7 +59,7 @@ const MyListings = () => {
     const updatedInfo = {
       name: form.name.value,
       category: form.category.value,
-      Price: Number(form.price.value),
+      price: Number(form.price.value),
       location: form.location.value,
       description: form.description.value,
       image: form.image.value,
@@ -136,7 +136,7 @@ const MyListings = () => {
                   </td>
                   <td className="font-semibold">{item.name}</td>
                   <td><span className="badge badge-outline badge-secondary whitespace-nowrap">{item.category}</span></td>
-                  <td className="font-bold text-primary">{item.Price === 0 ? <span className="text-success">Free</span> : `$${item.Price}`}</td>
+                  <td className="font-bold text-primary">{item.price === 0 ? <span className="text-success">Free</span> : `$${item.price}`}</td>
                   <td>{item.location}</td>
                   <td>{item.date}</td>
                   <td>
@@ -207,7 +207,7 @@ const MyListings = () => {
                 </div>
                 <div className="form-control">
                   <label className="label"><span className="label-text font-semibold">Price</span></label>
-                  <input name="price" type="number" min="0" defaultValue={editListing.Price} className="input input-bordered rounded-xl" />
+                  <input name="price" type="number" min="0" defaultValue={editListing.price} className="input input-bordered rounded-xl" />
                 </div>
                 <div className="form-control">
                   <label className="label"><span className="label-text font-semibold">Location</span></label>

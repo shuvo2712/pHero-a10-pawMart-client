@@ -17,7 +17,7 @@ const AddListing = () => {
     const newListing = {
       name: form.name.value,
       category: form.category.value,
-      Price: Number(form.price.value),
+      price: Number(form.price.value),
       location: form.location.value,
       description: form.description.value,
       image: form.image.value,

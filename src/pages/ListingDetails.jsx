@@ -47,7 +47,7 @@ const ListingDetails = () => {
     );
   }
 
-  const isPet = listing.Price === 0;
+  const isPet = listing.price === 0;
 
   return (
     <div className="p-4 md:p-8 max-w-6xl mx-auto mt-6 mb-20">
@@ -74,7 +74,7 @@ const ListingDetails = () => {
               <h1 className="text-3xl md:text-5xl font-bold text-base-content">{listing.name}</h1>
             </div>
             <p className="text-2xl md:text-3xl font-black text-primary">
-              {isPet ? <span className="text-success">Free</span> : `$${listing.Price}`}
+              {isPet ? <span className="text-success">Free</span> : `$${listing.price}`}
             </p>
           </div>
 
@@ -122,11 +122,10 @@ const ListingDetails = () => {
                     e.preventDefault();
                     const form = e.target;
                     const newOrder = {
-                      id: Date.now().toString(),
                       listingName: listing.name,
                       listingId: listing._id,
                       category: listing.category,
-                      price: listing.Price,
+                      price: listing.price,
                       buyerEmail: user?.email || "",
                       buyerName: user?.displayName || "",
                       quantity: isPet ? 1 : Number(form.quantity.value),
@@ -136,11 +135,27 @@ const ListingDetails = () => {
                       notes: form.notes.value,
                       orderedAt: new Date().toISOString().split("T")[0],
                     };
-                    const existing = JSON.parse(localStorage.getItem("myOrders") || "[]");
-                    existing.push(newOrder);
-                    localStorage.setItem("myOrders", JSON.stringify(existing));
-                    setOrderDone(true);
-                    toast.success("Order placed successfully!");
+
+                    fetch(`${import.meta.env.VITE_API_URL}/orders`, {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify(newOrder),
+                    })
+                      .then((res) => res.json())
+                      .then((data) => {
+                        if (data.insertedId) {
+                          setOrderDone(true);
+                          toast.success("Order placed successfully!");
+                        } else {
+                          toast.error("Failed to place order.");
+                        }
+                      })
+                      .catch((err) => {
+                        console.error("Error placing order:", err);
+                        toast.error("An error occurred. Please try again.");
+                      });
                   }}
                   className="space-y-3"
                 >
@@ -172,7 +187,7 @@ const ListingDetails = () => {
                     </div>
                     <div className="form-control">
                       <label className="label"><span className="label-text font-semibold">Price</span></label>
-                      <input type="text" value={listing.Price === 0 ? "Free" : `$${listing.Price}`} readOnly className="input input-bordered rounded-xl bg-base-200 cursor-not-allowed" />
+                      <input type="text" value={listing.price === 0 ? "Free" : `$${listing.price}`} readOnly className="input input-bordered rounded-xl bg-base-200 cursor-not-allowed" />
                     </div>
                   </div>
 

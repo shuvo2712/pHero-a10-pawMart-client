@@ -13,14 +13,18 @@ const MyOrders = () => {
   useDocumentTitle("My Orders");
 
   useEffect(() => {
+    if (!user?.email) return;
     setLoading(true);
-    const timer = setTimeout(() => {
-      const all = JSON.parse(localStorage.getItem("myOrders") || "[]");
-      const mine = all.filter((o) => o.buyerEmail === (user?.email || ""));
-      setOrders(mine);
-      setLoading(false);
-    }, 500);
-    return () => clearTimeout(timer);
+    fetch(`${import.meta.env.VITE_API_URL}/orders/email/${user.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setOrders(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error loading user orders:", err);
+        setLoading(false);
+      });
   }, [user]);
 
   const handleDownload = () => {
@@ -93,7 +97,7 @@ const MyOrders = () => {
             </thead>
             <tbody>
               {orders.map((order, index) => (
-                <tr key={order.id} className="hover">
+                <tr key={order._id} className="hover">
                   <td>{index + 1}</td>
                   <td className="font-semibold">{order.listingName}</td>
                   <td>{order.buyerName}</td>

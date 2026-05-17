@@ -57,7 +57,7 @@ const CategoryProducts = () => {
                 <div className="flex justify-between items-start">
                   <span className="badge badge-secondary badge-outline text-xs whitespace-nowrap">{item.category}</span>
                   <span className="font-bold text-primary text-lg">
-                    {item.Price === 0 ? (
+                    {item.price === 0 ? (
                       <span 
                         className="text-success" 
                         data-tooltip-id="free-badge-tip"
@@ -65,7 +65,7 @@ const CategoryProducts = () => {
                       >
                         Free
                       </span>
-                    ) : `$${item.Price}`}
+                    ) : `$${item.price}`}
                   </span>
                 </div>
                 <h3 className="card-title text-lg mt-2">{item.name}</h3>
