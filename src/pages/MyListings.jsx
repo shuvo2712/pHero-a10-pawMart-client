@@ -13,26 +13,42 @@ const MyListings = () => {
   const [editListing, setEditListing] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Load listings
+  // Load listings from mongoDB
   useEffect(() => {
+    if (!user?.email) return;
     setLoading(true);
-    const timer = setTimeout(() => {
-      const all = JSON.parse(localStorage.getItem("myListings") || "[]");
-      const mine = all.filter((item) => item.email === (user?.email || ""));
-      setListings(mine);
-      setLoading(false);
-    }, 500);
-    return () => clearTimeout(timer);
+    fetch(`${import.meta.env.VITE_API_URL}/listings/email/${user.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setListings(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error loading user listings:", err);
+        setLoading(false);
+      });
   }, [user]);
 
   // Delete handler
   const handleDelete = () => {
-    const all = JSON.parse(localStorage.getItem("myListings") || "[]");
-    const updated = all.filter((item) => item.id !== deleteId);
-    localStorage.setItem("myListings", JSON.stringify(updated));
-    setListings(updated.filter((item) => item.email === (user?.email || "")));
-    setDeleteId(null);
-    toast.success("Listing deleted.");
+    fetch(`${import.meta.env.VITE_API_URL}/listings/${deleteId}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          const remaining = listings.filter((item) => item._id !== deleteId);
+          setListings(remaining);
+          setDeleteId(null);
+          toast.success("Listing deleted successfully.");
+        } else {
+          toast.error("Failed to delete listing.");
+        }
+      })
+      .catch((err) => {
+        console.error("Error deleting listing:", err);
+        toast.error("An error occurred. Please try again.");
+      });
   };
 
   // Update handler
@@ -40,27 +56,43 @@ const MyListings = () => {
     e.preventDefault();
     const form = e.target;
 
-    const all = JSON.parse(localStorage.getItem("myListings") || "[]");
-    const updated = all.map((item) => {
-      if (item.id === editListing.id) {
-        return {
-          ...item,
-          name: form.name.value,
-          category: form.category.value,
-          Price: Number(form.price.value),
-          location: form.location.value,
-          description: form.description.value,
-          image: form.image.value,
-          date: form.date.value,
-        };
-      }
-      return item;
-    });
+    const updatedInfo = {
+      name: form.name.value,
+      category: form.category.value,
+      Price: Number(form.price.value),
+      location: form.location.value,
+      description: form.description.value,
+      image: form.image.value,
+      date: form.date.value,
+    };
 
-    localStorage.setItem("myListings", JSON.stringify(updated));
-    setListings(updated.filter((item) => item.email === (user?.email || "")));
-    setEditListing(null);
-    toast.success("Listing updated!");
+    fetch(`${import.meta.env.VITE_API_URL}/listings/${editListing._id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedInfo),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          const updatedListings = listings.map((item) => {
+            if (item._id === editListing._id) {
+              return { ...item, ...updatedInfo };
+            }
+            return item;
+          });
+          setListings(updatedListings);
+          setEditListing(null);
+          toast.success("Listing updated successfully!");
+        } else {
+          toast.error("Failed to update listing.");
+        }
+      })
+      .catch((err) => {
+        console.error("Error updating listing:", err);
+        toast.error("An error occurred. Please try again.");
+      });
   };
 
   if (loading) {
@@ -97,7 +129,7 @@ const MyListings = () => {
             </thead>
             <tbody>
               {listings.map((item, index) => (
-                <tr key={item.id} className="hover">
+                <tr key={item._id} className="hover">
                   <td>{index + 1}</td>
                   <td>
                     <img src={item.image} alt={item.name} className="w-14 h-14 object-cover rounded-xl" />
@@ -120,7 +152,7 @@ const MyListings = () => {
                       <button
                         data-tooltip-id="delete-tip"
                         data-tooltip-content="Delete Listing"
-                        onClick={() => setDeleteId(item.id)}
+                        onClick={() => setDeleteId(item._id)}
                         className="btn btn-sm btn-outline btn-error rounded-lg"
                       >
                         <FaTrash />
